@@ -16,7 +16,7 @@ export const personalInfo = {
   email: "kailashsharma382005@gmail.com",
   profileImage: "/assets/kailash_profile.jpg",
   socialLinks: {
-    github: "https://github.com/Kailashsharma202",
+    github: "https://github.com/Kailashsharma282",
     linkedin: "https://linkedin.com/in/kailash-sharma-4a1187328/",
     leetcode: "https://leetcode.com/u/JgeNjfID2U/",
     codeforces: "https://codeforces.com/profile/Kailash_Sharma",
@@ -123,7 +123,7 @@ export const projectsData: Project[] = [
       "Comprehensive evaluation breakdown: System Design, DSA, and Communication"
     ],
     metrics: "400ms average response latency • 95% evaluation accuracy",
-    githubUrl: "https://github.com/Kailashsharma202",
+    githubUrl: "https://github.com/Kailashsharma282",
     liveUrl: "https://ai-interview-platform-demo.vercel.app",
     category: "ai",
     badge: "Featured AI Project"
@@ -142,7 +142,7 @@ export const projectsData: Project[] = [
       "One-click production source code bundle download"
     ],
     metrics: "< 5s full site generation • Zero hydration mismatch",
-    githubUrl: "https://github.com/Kailashsharma202",
+    githubUrl: "https://github.com/Kailashsharma282",
     liveUrl: "https://ai-web-builder-demo.vercel.app",
     category: "fullstack",
     badge: "Interactive Tool"
@@ -161,7 +161,7 @@ export const projectsData: Project[] = [
       "Jepsen-style fault injection testing simulating partition recovery"
     ],
     metrics: "50,000+ ops/sec throughput • 0 data loss under network partitions",
-    githubUrl: "https://github.com/Kailashsharma202",
+    githubUrl: "https://github.com/Kailashsharma282",
     category: "systems",
     badge: "Core Systems"
   }

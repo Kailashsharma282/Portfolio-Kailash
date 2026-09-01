@@ -77,7 +77,7 @@ npm run preview
 - **Name**: Kailash Sharma
 - **Institution**: Indian Institute of Technology, Kharagpur (2023 - 2027)
 - **Profiles**:
-  - [GitHub](https://github.com/Kailashsharma202)
+  - [GitHub](https://github.com/Kailashsharma282)
   - [LinkedIn](https://linkedin.com/in/kailash-sharma-4a1187328/)
   - [LeetCode](https://leetcode.com/u/JgeNjfID2U/)
   - [Codeforces](https://codeforces.com/profile/Kailash_Sharma)
