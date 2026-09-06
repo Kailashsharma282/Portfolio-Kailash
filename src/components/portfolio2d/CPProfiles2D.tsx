@@ -27,13 +27,13 @@ export const CPProfiles2D: React.FC = () => {
             }}
           >
             <Terminal size={14} />
-            <span>Problem Solving & Algorithms</span>
+            <span>Algorithmic Problem Solving</span>
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800, letterSpacing: '-0.02em' }}>
             Competitive <span className="gradient-text">Programming</span>
           </h2>
           <p style={{ color: '#94a3b8', maxWidth: '640px', margin: '12px auto 0', fontSize: '1rem' }}>
-            Verified ratings and problem-solving benchmarks across premier competitive programming platforms.
+            Verified performance across major competitive programming platforms demonstrating strong DSA and speed.
           </p>
         </div>
 
@@ -59,14 +59,17 @@ export const CPProfiles2D: React.FC = () => {
                 justifyContent: 'space-between',
                 position: 'relative',
                 overflow: 'hidden',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
               onMouseEnter={(e) => {
                 soundManager.playHoverBeep();
                 e.currentTarget.style.borderColor = profile.color;
-                e.currentTarget.style.boxShadow = `0 14px 40px -10px ${profile.color}35`;
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = `0 16px 40px -10px ${profile.color}40, 0 0 20px ${profile.color}20`;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
@@ -113,26 +116,27 @@ export const CPProfiles2D: React.FC = () => {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div
                       style={{
-                        width: '38px',
-                        height: '38px',
+                        width: '42px',
+                        height: '42px',
                         borderRadius: '10px',
-                        background: `${profile.color}15`,
+                        background: `${profile.color}18`,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         color: profile.color,
+                        boxShadow: `0 0 15px ${profile.color}30`,
                       }}
                     >
                       <Trophy size={20} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase' }}>
-                        Peak Rating
+                        Peak Standing
                       </div>
-                      <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#f8fafc', fontFamily: 'var(--font-heading)' }}>
+                      <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc', fontFamily: 'var(--font-heading)' }}>
                         {profile.maxRating}
                       </div>
                     </div>
@@ -141,9 +145,9 @@ export const CPProfiles2D: React.FC = () => {
                   {profile.rank && (
                     <div style={{ textAlign: 'right' }}>
                       <div style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase' }}>
-                        Rank Status
+                        Percentile / Status
                       </div>
-                      <div style={{ fontSize: '0.9rem', fontWeight: 700, color: profile.color }}>
+                      <div style={{ fontSize: '0.88rem', fontWeight: 700, color: profile.color }}>
                         {profile.rank}
                       </div>
                     </div>
@@ -159,10 +163,10 @@ export const CPProfiles2D: React.FC = () => {
                         background: 'rgba(255, 255, 255, 0.02)',
                         border: '1px solid rgba(255, 255, 255, 0.05)',
                         borderRadius: '10px',
-                        padding: '10px',
+                        padding: '10px 12px',
                       }}
                     >
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{s.label}</div>
+                      <div style={{ fontSize: '0.74rem', color: '#94a3b8' }}>{s.label}</div>
                       <div style={{ fontSize: '1rem', fontWeight: 700, color: '#e2e8f0', fontFamily: 'var(--font-mono)', marginTop: '2px' }}>
                         {s.value}
                       </div>
@@ -183,8 +187,8 @@ export const CPProfiles2D: React.FC = () => {
                   gap: '8px',
                   padding: '12px 18px',
                   borderRadius: '12px',
-                  background: `${profile.color}15`,
-                  border: `1px solid ${profile.color}40`,
+                  background: `${profile.color}18`,
+                  border: `1px solid ${profile.color}50`,
                   color: profile.color,
                   textDecoration: 'none',
                   fontWeight: 600,
@@ -197,7 +201,7 @@ export const CPProfiles2D: React.FC = () => {
                   e.currentTarget.style.color = '#ffffff';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = `${profile.color}15`;
+                  e.currentTarget.style.background = `${profile.color}18`;
                   e.currentTarget.style.color = profile.color;
                 }}
               >

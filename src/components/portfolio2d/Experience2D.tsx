@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { experiencesData } from '../../data/portfolioData';
-import { Briefcase, Calendar, MapPin, ChevronRight, Server, Cpu, Layers } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, Server, Cpu, Brain, Layers, CheckCircle2 } from 'lucide-react';
 import { soundManager } from '../../utils/sound';
 
 export const Experience2D: React.FC = () => {
@@ -10,6 +10,7 @@ export const Experience2D: React.FC = () => {
     switch (iconName) {
       case 'Server': return <Server size={20} />;
       case 'Cpu': return <Cpu size={20} />;
+      case 'Brain': return <Brain size={20} />;
       case 'Layers': return <Layers size={20} />;
       default: return <Briefcase size={20} />;
     }
@@ -18,7 +19,7 @@ export const Experience2D: React.FC = () => {
   return (
     <section id="experience" style={{ padding: '100px 0', position: 'relative' }}>
       <div className="container-custom">
-        {/* Heading */}
+        {/* Section Heading */}
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <div
             style={{
@@ -38,28 +39,29 @@ export const Experience2D: React.FC = () => {
             }}
           >
             <Briefcase size={14} />
-            <span>Career Milestones</span>
+            <span>Professional & Engineering Roles</span>
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800, letterSpacing: '-0.02em' }}>
             Work <span className="gradient-text">Experience</span>
           </h2>
           <p style={{ color: '#94a3b8', maxWidth: '640px', margin: '12px auto 0', fontSize: '1rem' }}>
-            Hands-on software engineering and AI internships delivering high-concurrency microservices, machine learning models, and festival infrastructure.
+            Production engineering experience delivering gRPC microservices, fraud detection classification pipelines, LLM RAG agents, and festival infrastructure.
           </p>
         </div>
 
         {/* Timeline Layout */}
-        <div style={{ position: 'relative', maxWidth: '900px', margin: '0 auto' }}>
-          {/* Vertical central glowing line */}
+        <div style={{ position: 'relative', maxWidth: '920px', margin: '0 auto' }}>
+          {/* Vertical central glowing laser line */}
           <div
             style={{
               position: 'absolute',
               top: '20px',
               bottom: '20px',
               left: '28px',
-              width: '2px',
-              background: 'linear-gradient(to bottom, #06b6d4, #8b5cf6, #3b82f6)',
-              boxShadow: '0 0 12px rgba(6, 182, 212, 0.5)',
+              width: '3px',
+              background: 'linear-gradient(to bottom, #06b6d4, #ec4899, #a855f7, #3b82f6)',
+              boxShadow: '0 0 16px rgba(6, 182, 212, 0.6)',
+              borderRadius: '2px',
             }}
           />
 
@@ -71,7 +73,7 @@ export const Experience2D: React.FC = () => {
                   key={exp.id}
                   style={{
                     position: 'relative',
-                    paddingLeft: '72px',
+                    paddingLeft: '76px',
                   }}
                 >
                   {/* Timeline node icon */}
@@ -82,22 +84,22 @@ export const Experience2D: React.FC = () => {
                     }}
                     style={{
                       position: 'absolute',
-                      left: '12px',
+                      left: '11px',
                       top: '0',
-                      width: '34px',
-                      height: '34px',
+                      width: '38px',
+                      height: '38px',
                       borderRadius: '50%',
                       background: '#0a0d1d',
                       border: `2px solid ${exp.color}`,
-                      boxShadow: `0 0 16px ${exp.color}`,
+                      boxShadow: isActive ? `0 0 24px ${exp.color}` : `0 0 10px ${exp.color}60`,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: exp.color,
                       cursor: 'pointer',
                       zIndex: 2,
-                      transform: isActive ? 'scale(1.15)' : 'scale(1)',
-                      transition: 'transform 0.2s ease',
+                      transform: isActive ? 'scale(1.18)' : 'scale(1)',
+                      transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
                     }}
                   >
                     {getIcon(exp.iconName)}
@@ -113,8 +115,9 @@ export const Experience2D: React.FC = () => {
                     style={{
                       padding: '28px 30px',
                       borderColor: isActive ? exp.color : 'rgba(255, 255, 255, 0.08)',
-                      boxShadow: isActive ? `0 10px 30px -10px ${exp.color}40` : undefined,
+                      boxShadow: isActive ? `0 14px 40px -10px ${exp.color}40, 0 0 20px ${exp.color}20` : undefined,
                       cursor: 'pointer',
+                      transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                     }}
                   >
                     {/* Header Row */}
@@ -129,15 +132,15 @@ export const Experience2D: React.FC = () => {
                       }}
                     >
                       <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#ffffff' }}>
                             {exp.company}
                           </h3>
                           <span
                             style={{
                               background: `${exp.color}20`,
                               color: exp.color,
-                              border: `1px solid ${exp.color}50`,
+                              border: `1px solid ${exp.color}60`,
                               borderRadius: '6px',
                               padding: '2px 8px',
                               fontSize: '0.72rem',
@@ -160,7 +163,7 @@ export const Experience2D: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Period and Location Badges */}
+                      {/* Period and Location */}
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
                         <div
                           style={{
@@ -174,6 +177,7 @@ export const Experience2D: React.FC = () => {
                             background: 'rgba(255, 255, 255, 0.05)',
                             padding: '4px 10px',
                             borderRadius: '6px',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
                           }}
                         >
                           <Calendar size={13} color={exp.color} />
@@ -190,12 +194,12 @@ export const Experience2D: React.FC = () => {
                       {exp.description}
                     </p>
 
-                    {/* Bullet Highlights */}
+                    {/* Bullet Highlights from Resume */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '22px' }}>
                       {exp.highlights.map((point, hIdx) => (
                         <div key={hIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                          <ChevronRight size={16} color={exp.color} style={{ marginTop: '3px', flexShrink: 0 }} />
-                          <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.5 }}>
+                          <CheckCircle2 size={16} color={exp.color} style={{ marginTop: '3px', flexShrink: 0 }} />
+                          <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.55 }}>
                             {point}
                           </span>
                         </div>
@@ -215,6 +219,15 @@ export const Experience2D: React.FC = () => {
                             fontSize: '0.78rem',
                             color: '#cbd5e1',
                             fontWeight: 500,
+                            transition: 'all 0.2s',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.borderColor = exp.color;
+                            e.currentTarget.style.color = '#ffffff';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                            e.currentTarget.style.color = '#cbd5e1';
                           }}
                         >
                           {tech}

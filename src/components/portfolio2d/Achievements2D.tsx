@@ -1,6 +1,6 @@
 import React from 'react';
 import { achievementsData } from '../../data/portfolioData';
-import { Trophy, Award, Target, Terminal, Sparkles } from 'lucide-react';
+import { Trophy, Award, Target, Terminal, Sparkles, Medal } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../../utils/sound';
 
@@ -12,8 +12,8 @@ export const Achievements2D: React.FC = () => {
     const y = (rect.top + rect.height / 2) / window.innerHeight;
 
     confetti({
-      particleCount: 45,
-      spread: 60,
+      particleCount: 50,
+      spread: 70,
       origin: { x, y },
       colors: ['#06b6d4', '#a855f7', '#f59e0b', '#3b82f6', '#10b981'],
     });
@@ -21,10 +21,11 @@ export const Achievements2D: React.FC = () => {
 
   const getIcon = (id: string) => {
     switch (id) {
-      case 'omnixan-2026': return <Trophy size={26} color="#f59e0b" />;
-      case 'jee-main': return <Target size={26} color="#06b6d4" />;
-      case 'jee-advanced': return <Award size={26} color="#c084fc" />;
-      default: return <Terminal size={26} color="#10b981" />;
+      case 'omnikon-2026': return <Trophy size={26} color="#f59e0b" />;
+      case 'leetcode-contest-500': return <Terminal size={26} color="#ffa116" />;
+      case 'codechef-starters-254': return <Medal size={26} color="#8b5cf6" />;
+      case 'codeforces-round-1117': return <Award size={26} color="#3b82f6" />;
+      default: return <Target size={26} color="#06b6d4" />;
     }
   };
 
@@ -51,13 +52,13 @@ export const Achievements2D: React.FC = () => {
             }}
           >
             <Trophy size={14} />
-            <span>Honors & Recognitions</span>
+            <span>Competitive & Academic Honors</span>
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800, letterSpacing: '-0.02em' }}>
             Key <span className="gradient-text-gold">Achievements</span>
           </h2>
           <p style={{ color: '#94a3b8', maxWidth: '640px', margin: '12px auto 0', fontSize: '1rem' }}>
-            National competitive exam percentiles, nationwide hackathon honors, and algorithmic bootcamps.
+            National hackathon rankings, premier competitive algorithmic percentiles, and engineering entrance distinctions.
           </p>
         </div>
 
@@ -65,7 +66,7 @@ export const Achievements2D: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '24px',
           }}
         >
@@ -84,14 +85,17 @@ export const Achievements2D: React.FC = () => {
                 position: 'relative',
                 overflow: 'hidden',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
               onMouseEnter={(e) => {
                 soundManager.playHoverBeep();
-                e.currentTarget.style.borderColor = `${ach.color}80`;
-                e.currentTarget.style.boxShadow = `0 15px 35px -10px ${ach.color}35`;
+                e.currentTarget.style.borderColor = `${ach.color}90`;
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = `0 18px 40px -10px ${ach.color}40, 0 0 20px ${ach.color}20`;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
@@ -164,7 +168,7 @@ export const Achievements2D: React.FC = () => {
 
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', color: '#64748b' }}>
                   <Sparkles size={12} color={ach.color} />
-                  <span>Click for celebratory effect</span>
+                  <span>Click for Confetti</span>
                 </span>
               </div>
             </div>

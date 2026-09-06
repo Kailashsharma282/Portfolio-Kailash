@@ -203,6 +203,57 @@ class SoundManager {
       // ignore
     }
   }
+
+  public playKeyClick() {
+    if (this.isMuted) return;
+    this.initContext();
+    if (!this.ctx) return;
+
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(1200 + Math.random() * 400, this.ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.006, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.00001, this.ctx.currentTime + 0.02);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.02);
+    } catch {
+      // ignore
+    }
+  }
+
+  public playTargetLock() {
+    if (this.isMuted) return;
+    this.initContext();
+    if (!this.ctx) return;
+
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+      osc.frequency.setValueAtTime(1600, this.ctx.currentTime + 0.04);
+
+      gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.09);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.09);
+    } catch {
+      // ignore
+    }
+  }
 }
 
 export const soundManager = new SoundManager();

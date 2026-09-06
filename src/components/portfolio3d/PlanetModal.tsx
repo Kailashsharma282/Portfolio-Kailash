@@ -1,6 +1,6 @@
 import React from 'react';
-import { celestialStations, personalInfo, educationData, experiencesData, projectsData, achievementsData, cpProfilesData, skillCategoriesData } from '../../data/portfolioData';
-import { X, ExternalLink, GraduationCap, Mail, CheckCircle2 } from 'lucide-react';
+import { celestialStations, personalInfo, educationData, experiencesData, projectsData, achievementsData, cpProfilesData } from '../../data/portfolioData';
+import { X, ExternalLink, CheckCircle2, Server, Cpu, Brain, Trophy } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { soundManager } from '../../utils/sound';
 
@@ -31,7 +31,7 @@ export const PlanetModal: React.FC<PlanetModalProps> = ({ stationId, onClose, on
         className="modal-content hologram-hud"
         onClick={(e) => e.stopPropagation()}
         style={{
-          maxWidth: '840px',
+          maxWidth: '860px',
           background: 'rgba(10, 13, 30, 0.95)',
           border: `1px solid ${station.color}70`,
           boxShadow: `0 0 50px -10px ${station.color}40, 0 25px 60px rgba(0,0,0,0.8)`,
@@ -91,7 +91,8 @@ export const PlanetModal: React.FC<PlanetModalProps> = ({ stationId, onClose, on
         </div>
 
         {/* Section Content based on Station ID */}
-        <div style={{ maxHeight: '60vh', overflowY: 'auto', paddingRight: '6px' }}>
+        <div style={{ maxHeight: '62vh', overflowY: 'auto', paddingRight: '6px' }}>
+          {/* Station: About & Education */}
           {stationId === 'about' && (
             <div>
               <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '24px' }}>
@@ -99,82 +100,51 @@ export const PlanetModal: React.FC<PlanetModalProps> = ({ stationId, onClose, on
                   src={personalInfo.profileImage}
                   alt={personalInfo.name}
                   style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '16px',
+                    width: '84px',
+                    height: '84px',
+                    borderRadius: '18px',
                     objectFit: 'cover',
                     border: `2px solid ${station.color}`,
                     boxShadow: `0 0 20px ${station.color}50`,
                   }}
                 />
                 <div>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff' }}>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>
                     {personalInfo.name}
                   </h3>
                   <div style={{ color: station.color, fontSize: '0.9rem', fontWeight: 600 }}>
                     {personalInfo.tagline}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '4px' }}>
-                    {personalInfo.location}
+                  <div style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '4px' }}>
+                    {personalInfo.location} • IIT Kharagpur (2023 – 2027)
                   </div>
                 </div>
               </div>
 
-              <div
-                style={{
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: '14px',
-                  padding: '20px',
-                  marginBottom: '20px',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <GraduationCap size={18} color={station.color} />
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff' }}>
-                    {educationData.institution}
-                  </h4>
-                </div>
-                <div style={{ color: '#cbd5e1', fontSize: '0.9rem', marginBottom: '6px' }}>
-                  {educationData.degree}
-                </div>
-                <div style={{ display: 'inline-block', background: `${station.color}20`, color: station.color, padding: '3px 10px', borderRadius: '6px', fontSize: '0.82rem', fontWeight: 700, fontFamily: 'var(--font-mono)', marginBottom: '14px' }}>
-                  {educationData.grade} • {educationData.period}
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.85rem', color: '#cbd5e1' }}>
-                  {educationData.highlights.map((h, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                      <CheckCircle2 size={15} color={station.color} style={{ marginTop: '2px', flexShrink: 0 }} />
-                      <span>{h}</span>
+              {/* Education Stack */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '20px' }}>
+                {educationData.history?.map((edu) => (
+                  <div
+                    key={edu.id}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      borderRadius: '12px',
+                      padding: '16px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                      <h4 style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.98rem' }}>{edu.institution}</h4>
+                      <span style={{ color: station.color, fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 600 }}>
+                        {edu.period}
+                      </span>
                     </div>
-                  ))}
-                </div>
-
-                {educationData.coursework && (
-                  <div style={{ marginTop: '14px', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                    <div style={{ fontSize: '0.74rem', color: station.color, fontWeight: 700, textTransform: 'uppercase', marginBottom: '8px' }}>
-                      Verified Coursework
-                    </div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                      {educationData.coursework.map((course) => (
-                        <span
-                          key={course}
-                          style={{
-                            background: `${station.color}15`,
-                            border: `1px solid ${station.color}35`,
-                            borderRadius: '6px',
-                            padding: '3px 8px',
-                            fontSize: '0.72rem',
-                            color: '#e2e8f0',
-                            fontWeight: 500,
-                          }}
-                        >
-                          {course}
-                        </span>
-                      ))}
+                    <div style={{ fontSize: '0.86rem', color: '#94a3b8', marginBottom: '6px' }}>{edu.degree}</div>
+                    <div style={{ display: 'inline-block', background: `${station.color}20`, color: station.color, padding: '2px 8px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 700 }}>
+                      {edu.gradeType}: {edu.grade}
                     </div>
                   </div>
-                )}
+                ))}
               </div>
 
               {onOpenResume && (
@@ -184,39 +154,48 @@ export const PlanetModal: React.FC<PlanetModalProps> = ({ stationId, onClose, on
                     onOpenResume();
                   }}
                   className="btn-neon-primary"
-                  style={{ width: '100%', justifyContent: 'center' }}
+                  style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}
                 >
-                  <span>Open Full Professional Resume</span>
+                  <span>Open Full Printable Resume</span>
                 </button>
               )}
             </div>
           )}
 
-          {stationId === 'experience' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {experiencesData.map((exp) => (
-                <div
-                  key={exp.id}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid ${exp.color}40`,
-                    borderRadius: '14px',
-                    padding: '20px',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#ffffff' }}>{exp.company}</h4>
-                    <span style={{ fontSize: '0.8rem', color: exp.color, fontFamily: 'var(--font-mono)' }}>{exp.period}</span>
+          {/* Station: MeetMux Engineering */}
+          {stationId === 'meetmux' && (
+            <div>
+              {experiencesData.filter(e => e.id === 'meetmux').map(exp => (
+                <div key={exp.id}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                    <Server size={22} color={station.color} />
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>{exp.company}</h3>
+                    <span style={{ background: `${station.color}20`, color: station.color, padding: '2px 8px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>
+                      {exp.type}
+                    </span>
                   </div>
-                  <div style={{ color: exp.color, fontSize: '0.9rem', fontWeight: 600, marginBottom: '10px' }}>
-                    {exp.role}
+                  <div style={{ color: station.color, fontSize: '0.95rem', fontWeight: 600, marginBottom: '16px' }}>
+                    {exp.role} • {exp.period}
                   </div>
-                  <p style={{ color: '#cbd5e1', fontSize: '0.88rem', lineHeight: 1.5, marginBottom: '12px' }}>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px' }}>
                     {exp.description}
                   </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                    {exp.technologies.map((t) => (
-                      <span key={t} style={{ background: 'rgba(255, 255, 255, 0.06)', borderRadius: '6px', padding: '2px 8px', fontSize: '0.72rem', color: '#94a3b8' }}>
+
+                  <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                    Key Engineering Highlights
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                    {exp.highlights.map((h, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                        <CheckCircle2 size={16} color={station.color} style={{ marginTop: '3px', flexShrink: 0 }} />
+                        <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.5 }}>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {exp.technologies.map(t => (
+                      <span key={t} style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${station.color}40`, color: '#e2e8f0', padding: '4px 10px', borderRadius: '6px', fontSize: '0.78rem' }}>
                         {t}
                       </span>
                     ))}
@@ -226,209 +205,274 @@ export const PlanetModal: React.FC<PlanetModalProps> = ({ stationId, onClose, on
             </div>
           )}
 
-          {stationId === 'projects' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {projectsData.map((proj) => (
-                <div
-                  key={proj.id}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '14px',
-                    padding: '20px',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                    <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff' }}>{proj.title}</h4>
-                    <span style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#38bdf8', padding: '2px 8px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: 700 }}>
+          {/* Station: Prathik ML & Fraud Detection */}
+          {stationId === 'prathik' && (
+            <div>
+              {experiencesData.filter(e => e.id === 'prathik').map(exp => (
+                <div key={exp.id}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                    <Cpu size={22} color={station.color} />
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>{exp.company}</h3>
+                    <span style={{ background: `${station.color}20`, color: station.color, padding: '2px 8px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>
+                      {exp.type}
+                    </span>
+                  </div>
+                  <div style={{ color: station.color, fontSize: '0.95rem', fontWeight: 600, marginBottom: '16px' }}>
+                    {exp.role} • {exp.period}
+                  </div>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px' }}>
+                    {exp.description}
+                  </p>
+
+                  <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                    Pipeline & Optimization Details
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                    {exp.highlights.map((h, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                        <CheckCircle2 size={16} color={station.color} style={{ marginTop: '3px', flexShrink: 0 }} />
+                        <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.5 }}>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {exp.technologies.map(t => (
+                      <span key={t} style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${station.color}40`, color: '#e2e8f0', padding: '4px 10px', borderRadius: '6px', fontSize: '0.78rem' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Station: CognifyEV AI Chatbot */}
+          {stationId === 'cognifyev' && (
+            <div>
+              {experiencesData.filter(e => e.id === 'cognifyev').map(exp => (
+                <div key={exp.id}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                    <Brain size={22} color={station.color} />
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>{exp.company}</h3>
+                    <span style={{ background: `${station.color}20`, color: station.color, padding: '2px 8px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>
+                      {exp.type}
+                    </span>
+                  </div>
+                  <div style={{ color: station.color, fontSize: '0.95rem', fontWeight: 600, marginBottom: '16px' }}>
+                    {exp.role} • {exp.period}
+                  </div>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px' }}>
+                    {exp.description}
+                  </p>
+
+                  <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                    RAG & Inference Pipeline
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                    {exp.highlights.map((h, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                        <CheckCircle2 size={16} color={station.color} style={{ marginTop: '3px', flexShrink: 0 }} />
+                        <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.5 }}>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {exp.technologies.map(t => (
+                      <span key={t} style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${station.color}40`, color: '#e2e8f0', padding: '4px 10px', borderRadius: '6px', fontSize: '0.78rem' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Station: C++20 Distributed Key-Value Store */}
+          {stationId === 'kvstore' && (
+            <div>
+              {projectsData.filter(p => p.id === 'distributed-kv-store').map(proj => (
+                <div key={proj.id}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#fff' }}>{proj.title}</h3>
+                    <span style={{ background: `${station.color}20`, color: station.color, padding: '3px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>
                       {proj.badge}
                     </span>
                   </div>
-                  <div style={{ color: '#38bdf8', fontSize: '0.85rem', fontWeight: 600, marginBottom: '10px' }}>
+                  <div style={{ color: station.color, fontSize: '0.92rem', fontWeight: 600, marginBottom: '14px' }}>
                     {proj.subtitle}
                   </div>
-                  <p style={{ color: '#cbd5e1', fontSize: '0.88rem', lineHeight: 1.5, marginBottom: '14px' }}>
-                    {proj.description}
+                  <p style={{ color: '#cbd5e1', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px' }}>
+                    {proj.longDescription || proj.description}
                   </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
-                    {proj.tags.map((t) => (
-                      <span key={t} style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '6px', padding: '2px 8px', fontSize: '0.72rem', color: '#94a3b8' }}>
+
+                  <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                    Distributed Consensus & Storage Features
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                    {proj.features.map((f, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                        <CheckCircle2 size={16} color={station.color} style={{ marginTop: '3px', flexShrink: 0 }} />
+                        <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.5 }}>{f}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '20px' }}>
+                    {proj.tags.map(t => (
+                      <span key={t} style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${station.color}40`, color: '#e2e8f0', padding: '4px 10px', borderRadius: '6px', fontSize: '0.78rem' }}>
                         {t}
                       </span>
                     ))}
                   </div>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <a
-                      href={proj.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="glass-pill"
-                      style={{ textDecoration: 'none', color: '#f8fafc' }}
-                    >
-                      <GithubIcon size={14} />
-                      <span>Code Repository</span>
-                    </a>
-                    {proj.liveUrl && (
-                      <a
-                        href={proj.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="glass-pill"
-                        style={{ textDecoration: 'none', color: '#38bdf8' }}
-                      >
-                        <ExternalLink size={14} />
-                        <span>Live Demo</span>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
 
-          {stationId === 'achievements' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
-              {achievementsData.map((ach) => (
-                <div
-                  key={ach.id}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid ${ach.color}40`,
-                    borderRadius: '14px',
-                    padding: '20px',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: ach.color, fontFamily: 'var(--font-heading)' }}>
-                      {ach.stat}
-                    </span>
-                    <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>{ach.statLabel}</span>
-                  </div>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', marginBottom: '4px' }}>
-                    {ach.title}
-                  </h4>
-                  <p style={{ color: '#cbd5e1', fontSize: '0.85rem', lineHeight: 1.5 }}>
-                    {ach.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {stationId === 'skills' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {skillCategoriesData.map((cat) => (
-                <div
-                  key={cat.title}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '14px',
-                    padding: '18px',
-                  }}
-                >
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: cat.color, marginBottom: '12px' }}>
-                    {cat.title}
-                  </h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {cat.skills.map((s) => (
-                      <span
-                        key={s.name}
-                        style={{
-                          background: `${cat.color}15`,
-                          border: `1px solid ${cat.color}35`,
-                          color: '#f8fafc',
-                          borderRadius: '8px',
-                          padding: '4px 10px',
-                          fontSize: '0.8rem',
-                          fontWeight: 500,
-                        }}
-                      >
-                        {s.name} <strong style={{ color: cat.color }}>({s.level}%)</strong>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {stationId === 'cp' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-              {cpProfilesData.map((p) => (
-                <div
-                  key={p.platform}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid ${p.color}50`,
-                    borderRadius: '14px',
-                    padding: '18px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    flexWrap: 'wrap',
-                    gap: '12px',
-                  }}
-                >
-                  <div>
-                    <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff' }}>{p.platform}</h4>
-                    <div style={{ fontSize: '0.82rem', color: '#94a3b8', fontFamily: 'var(--font-mono)' }}>@{p.handle}</div>
-                    <div style={{ color: p.color, fontWeight: 700, fontSize: '1.1rem', marginTop: '4px' }}>
-                      Max Rating: {p.maxRating}
-                    </div>
-                  </div>
                   <a
-                    href={p.url}
+                    href={proj.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    style={{
-                      background: `${p.color}20`,
-                      border: `1px solid ${p.color}60`,
-                      color: p.color,
-                      padding: '8px 16px',
-                      borderRadius: '10px',
-                      fontSize: '0.82rem',
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                    }}
+                    className="btn-glass-secondary"
+                    style={{ display: 'inline-flex', padding: '10px 18px', fontSize: '0.88rem' }}
                   >
-                    <span>View Profile</span>
-                    <ExternalLink size={14} />
+                    <GithubIcon size={16} />
+                    <span>View C++20 Raft Source</span>
                   </a>
                 </div>
               ))}
             </div>
           )}
 
+          {/* Station: Drishti AI Oversight Layer */}
+          {stationId === 'drishti' && (
+            <div>
+              {projectsData.filter(p => p.id === 'drishti-ai-oversight').map(proj => (
+                <div key={proj.id}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#fff' }}>{proj.title}</h3>
+                    <span style={{ background: `${station.color}20`, color: station.color, padding: '3px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>
+                      {proj.badge}
+                    </span>
+                  </div>
+                  <div style={{ color: station.color, fontSize: '0.92rem', fontWeight: 600, marginBottom: '14px' }}>
+                    {proj.subtitle}
+                  </div>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px' }}>
+                    {proj.longDescription || proj.description}
+                  </p>
+
+                  <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                    Real-Time Safety & Risk Classifiers
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                    {proj.features.map((f, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                        <CheckCircle2 size={16} color={station.color} style={{ marginTop: '3px', flexShrink: 0 }} />
+                        <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.5 }}>{f}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '20px' }}>
+                    {proj.tags.map(t => (
+                      <span key={t} style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${station.color}40`, color: '#e2e8f0', padding: '4px 10px', borderRadius: '6px', fontSize: '0.78rem' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={proj.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-glass-secondary"
+                    style={{ display: 'inline-flex', padding: '10px 18px', fontSize: '0.88rem' }}
+                  >
+                    <GithubIcon size={16} />
+                    <span>View Oversight Engine Repository</span>
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Station: Competitive Programming */}
+          {stationId === 'cp' && (
+            <div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+                {cpProfilesData.map(cp => (
+                  <div key={cp.platform} style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${cp.color}40`, borderRadius: '12px', padding: '16px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <h4 style={{ fontWeight: 800, color: '#fff' }}>{cp.platform}</h4>
+                      <span style={{ color: cp.color, fontWeight: 700, fontSize: '0.78rem', fontFamily: 'var(--font-mono)' }}>{cp.badge}</span>
+                    </div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-heading)' }}>
+                      {cp.maxRating}
+                    </div>
+                    <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '2px' }}>
+                      {cp.rank}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                Verified Competitive Milestones
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {achievementsData.map(ach => (
+                  <div key={ach.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', background: 'rgba(255,255,255,0.02)', padding: '10px 14px', borderRadius: '10px' }}>
+                    <Trophy size={16} color={ach.color} style={{ marginTop: '2px', flexShrink: 0 }} />
+                    <div>
+                      <div style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.88rem' }}>{ach.title}</div>
+                      <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{ach.statLabel}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Station: Contact */}
           {stationId === 'contact' && (
-            <div style={{ textAlign: 'center', padding: '10px 0' }}>
-              <Mail size={40} color={station.color} style={{ margin: '0 auto 12px' }} />
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '8px' }}>
-                Open for Collaboration
-              </h3>
-              <p style={{ color: '#cbd5e1', fontSize: '0.95rem', maxWidth: '480px', margin: '0 auto 24px' }}>
-                Send an email or connect with Kailash Sharma across GitHub and LinkedIn.
-              </p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="btn-neon-primary"
-                  style={{ padding: '10px 20px', fontSize: '0.9rem' }}
-                >
-                  <Mail size={16} />
-                  <span>{personalInfo.email}</span>
-                </a>
+            <div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+                <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '16px' }}>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase' }}>IIT Kharagpur Email</div>
+                  <a href={`mailto:${personalInfo.email}`} style={{ color: '#38bdf8', fontWeight: 600, fontSize: '1rem', textDecoration: 'none' }}>
+                    {personalInfo.email}
+                  </a>
+                </div>
+
+                <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '16px' }}>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase' }}>Phone Contact</div>
+                  <a href={`tel:${personalInfo.phone}`} style={{ color: '#34d399', fontWeight: 600, fontSize: '1rem', textDecoration: 'none' }}>
+                    {personalInfo.phone}
+                  </a>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '10px' }}>
                 <a
                   href={personalInfo.socialLinks.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="btn-glass-secondary"
-                  style={{ padding: '10px 20px', fontSize: '0.9rem' }}
+                  style={{ flex: 1, justifyContent: 'center' }}
                 >
-                  <span>LinkedIn Profile</span>
+                  <span>LinkedIn</span>
+                  <ExternalLink size={15} />
+                </a>
+                <a
+                  href={personalInfo.socialLinks.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-glass-secondary"
+                  style={{ flex: 1, justifyContent: 'center' }}
+                >
+                  <span>GitHub</span>
+                  <ExternalLink size={15} />
                 </a>
               </div>
             </div>

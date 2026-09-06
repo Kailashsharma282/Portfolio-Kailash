@@ -11,6 +11,11 @@ export interface Project {
   liveUrl?: string;
   category: 'ai' | 'backend' | 'systems' | 'fullstack';
   badge: string;
+  architectureDetails?: {
+    components: string[];
+    concurrencyModel: string;
+    keyInnovations: string[];
+  };
 }
 
 export interface Experience {
@@ -65,6 +70,19 @@ export interface SkillCategory {
   }[];
 }
 
+export interface EducationItem {
+  id: string;
+  institution: string;
+  degree: string;
+  boardOrProgram?: string;
+  period: string;
+  grade: string;
+  gradeType: 'CGPA' | 'Percentage' | 'GPA';
+  location: string;
+  highlights?: string[];
+  coursework?: string[];
+}
+
 export interface Education {
   institution: string;
   degree: string;
@@ -74,4 +92,6 @@ export interface Education {
   location: string;
   highlights: string[];
   coursework?: string[];
+  history?: EducationItem[];
 }
+

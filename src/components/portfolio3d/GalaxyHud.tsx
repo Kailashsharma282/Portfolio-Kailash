@@ -1,6 +1,6 @@
 import React from 'react';
 import { celestialStations } from '../../data/portfolioData';
-import { Volume2, VolumeX, Eye, Orbit, Compass, Box } from 'lucide-react';
+import { Volume2, VolumeX, Eye, Orbit, Compass, Box, Play, Pause, Crosshair } from 'lucide-react';
 import { soundManager } from '../../utils/sound';
 
 interface GalaxyHudProps {
@@ -11,6 +11,8 @@ interface GalaxyHudProps {
   onBackToSelector: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
+  isAutoTour?: boolean;
+  onToggleAutoTour?: () => void;
 }
 
 export const GalaxyHud: React.FC<GalaxyHudProps> = ({
@@ -21,7 +23,11 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
   onBackToSelector,
   isMuted,
   onToggleMute,
+  isAutoTour = false,
+  onToggleAutoTour,
 }) => {
+  const activeStation = celestialStations.find((s) => s.id === activeStationId);
+
   return (
     <div
       style={{
@@ -56,26 +62,63 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
             borderRadius: '12px',
             fontSize: '0.8rem',
             fontFamily: 'var(--font-mono)',
-            border: '1px solid rgba(6, 182, 212, 0.3)',
-            background: 'rgba(7, 10, 24, 0.75)',
-            boxShadow: '0 0 20px rgba(6, 182, 212, 0.15)',
-            maxWidth: '280px',
+            border: '1px solid rgba(6, 182, 212, 0.35)',
+            background: 'rgba(7, 10, 24, 0.8)',
+            boxShadow: '0 0 20px rgba(6, 182, 212, 0.2)',
+            maxWidth: '300px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#38bdf8', fontWeight: 700, marginBottom: '4px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#38bdf8', fontWeight: 700, marginBottom: '4px' }}>
             <Orbit size={15} className="animate-spin-slow" />
             <span>KS-SYSTEM // ORBITAL MATRIX</span>
           </div>
           <div style={{ color: '#94a3b8', fontSize: '0.72rem' }}>
-            Sector: IIT-KGP / Nexus 01
+            Sector: IIT-Kharagpur / Nexus 01
           </div>
-          <div style={{ color: '#cbd5e1', fontSize: '0.72rem', marginTop: '2px' }}>
-            Status: <span style={{ color: '#34d399', fontWeight: 600 }}>ONLINE • 7 STATIONS SYNCHRONIZED</span>
+          <div style={{ color: '#cbd5e1', fontSize: '0.72rem', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span>Status:</span>
+            <span style={{ color: isAutoTour ? '#c084fc' : '#34d399', fontWeight: 700 }}>
+              {isAutoTour ? 'AUTOPILOT TOUR ACTIVE' : '8 STATIONS SYNCHRONIZED'}
+            </span>
           </div>
+          {activeStation && (
+            <div style={{ marginTop: '4px', fontSize: '0.72rem', color: activeStation.color, fontWeight: 600 }}>
+              Tracking: {activeStation.name} [{activeStation.distance} AU]
+            </div>
+          )}
         </div>
 
         {/* Right Action Buttons */}
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          {/* Autopilot Tour Toggle Button */}
+          {onToggleAutoTour && (
+            <button
+              onClick={onToggleAutoTour}
+              title={isAutoTour ? 'Pause Autopilot Galaxy Tour' : 'Start Cinematic Autopilot Tour'}
+              style={{
+                background: isAutoTour ? 'linear-gradient(135deg, #9333ea, #ec4899)' : 'rgba(16, 20, 42, 0.85)',
+                border: isAutoTour ? '1px solid #ec4899' : '1px solid rgba(168, 85, 247, 0.4)',
+                color: isAutoTour ? '#ffffff' : '#e9d5ff',
+                padding: '8px 14px',
+                borderRadius: '10px',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                cursor: 'pointer',
+                backdropFilter: 'blur(10px)',
+                fontFamily: 'var(--font-heading)',
+                boxShadow: isAutoTour ? '0 0 20px rgba(236, 72, 153, 0.4)' : 'none',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              {isAutoTour ? <Pause size={14} /> : <Play size={14} />}
+              <span className="hud-label-desktop">{isAutoTour ? 'Touring...' : 'Auto-Tour'}</span>
+            </button>
+          )}
+
+          {/* Reset Overview Camera */}
           <button
             onClick={() => {
               soundManager.playSelectSound();
@@ -83,7 +126,7 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
             }}
             title="Reset to Galactic Overview"
             style={{
-              background: 'rgba(16, 20, 42, 0.8)',
+              background: 'rgba(16, 20, 42, 0.85)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               color: '#cbd5e1',
               padding: '8px 14px',
@@ -99,19 +142,20 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
             }}
           >
             <Eye size={14} />
-            <span style={{ display: 'none' }} className="hud-label-desktop">Overview</span>
+            <span className="hud-label-desktop">Overview</span>
             <style>{`
-              @media (min-width: 640px) {
-                .hud-label-desktop { display: inline !important; }
+              @media (max-width: 640px) {
+                .hud-label-desktop { display: none !important; }
               }
             `}</style>
           </button>
 
+          {/* Audio Synthesizer with Live Equalizer */}
           <button
             onClick={onToggleMute}
             title={isMuted ? 'Turn Sound ON' : 'Turn Sound OFF'}
             style={{
-              background: isMuted ? 'rgba(16, 20, 42, 0.8)' : 'rgba(6, 182, 212, 0.2)',
+              background: isMuted ? 'rgba(16, 20, 42, 0.85)' : 'rgba(6, 182, 212, 0.2)',
               border: `1px solid ${isMuted ? 'rgba(255, 255, 255, 0.15)' : 'rgba(6, 182, 212, 0.5)'}`,
               color: isMuted ? '#94a3b8' : '#38bdf8',
               padding: '8px 12px',
@@ -120,14 +164,24 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
               fontWeight: 600,
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '8px',
               cursor: 'pointer',
               backdropFilter: 'blur(10px)',
             }}
           >
             {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+            {!isMuted && (
+              <div className="audio-spectrum">
+                <span className="audio-bar" />
+                <span className="audio-bar" />
+                <span className="audio-bar" />
+                <span className="audio-bar" />
+                <span className="audio-bar" />
+              </div>
+            )}
           </button>
 
+          {/* Back to Selector */}
           <button
             onClick={() => {
               soundManager.playSelectSound();
@@ -135,7 +189,7 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
             }}
             title="Return to Experience Selector"
             style={{
-              background: 'rgba(16, 20, 42, 0.8)',
+              background: 'rgba(16, 20, 42, 0.85)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               color: '#cbd5e1',
               padding: '8px 12px',
@@ -151,16 +205,17 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
             }}
           >
             <Compass size={14} />
-            <span>Selector</span>
+            <span className="hud-label-desktop">Selector</span>
           </button>
 
+          {/* Switch to 2D Mode */}
           <button
             onClick={() => {
               soundManager.playSelectSound();
               onSwitchTo2D();
             }}
             style={{
-              background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.7), rgba(6, 182, 212, 0.7))',
+              background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.8), rgba(6, 182, 212, 0.8))',
               border: '1px solid rgba(6, 182, 212, 0.5)',
               color: '#ffffff',
               padding: '8px 16px',
@@ -182,15 +237,63 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
         </div>
       </div>
 
-      {/* Bottom Navigation Dock: 7 Planetary Stations */}
+      {/* Center Reticle Lock-On Indicator when a Station is active */}
+      {activeStation && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <div
+            className="reticle-bracket"
+            style={{
+              width: '100px',
+              height: '100px',
+              border: `2px dashed ${activeStation.color}`,
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: `0 0 25px ${activeStation.color}60`,
+            }}
+          >
+            <Crosshair size={28} color={activeStation.color} />
+          </div>
+          <div
+            style={{
+              background: 'rgba(7, 10, 24, 0.85)',
+              border: `1px solid ${activeStation.color}50`,
+              padding: '3px 10px',
+              borderRadius: '6px',
+              fontSize: '0.72rem',
+              color: activeStation.color,
+              fontFamily: 'var(--font-mono)',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+            }}
+          >
+            TARGET LOCKED // {activeStation.name.toUpperCase()}
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Navigation Dock: 8 Planetary Stations */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '12px',
+          gap: '10px',
           pointerEvents: 'auto',
-          maxWidth: '900px',
+          maxWidth: '960px',
           margin: '0 auto',
           width: '100%',
         }}
@@ -198,23 +301,23 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
         {/* Controls Instructions Hint */}
         <div
           style={{
-            background: 'rgba(7, 10, 24, 0.65)',
+            background: 'rgba(7, 10, 24, 0.75)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
-            padding: '6px 16px',
+            padding: '5px 16px',
             borderRadius: '9999px',
-            fontSize: '0.75rem',
+            fontSize: '0.74rem',
             color: '#94a3b8',
             backdropFilter: 'blur(8px)',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            gap: '10px',
           }}
         >
-          <span>🖱️ <strong>Drag</strong> to rotate orbit</span>
+          <span>🖱️ <strong>Drag</strong> to orbit</span>
           <span>•</span>
           <span>🔍 <strong>Scroll</strong> to zoom</span>
           <span>•</span>
-          <span>🪐 <strong>Click planet</strong> to inspect station</span>
+          <span>🪐 <strong>Click planet</strong> to inspect dossier</span>
         </div>
 
         {/* Stations Dock Bar */}
@@ -222,8 +325,8 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(10, 13, 29, 0.85)',
+            gap: '6px',
+            background: 'rgba(10, 13, 29, 0.88)',
             border: '1px solid rgba(255, 255, 255, 0.12)',
             borderRadius: '18px',
             padding: '8px 12px',
@@ -240,27 +343,28 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
                 key={station.id}
                 onClick={() => {
                   soundManager.playWarpSound();
+                  soundManager.playTargetLock();
                   onSelectStation(station.id);
                 }}
                 title={`Navigate to ${station.name}`}
                 style={{
                   background: isSelected
-                    ? `linear-gradient(135deg, ${station.color}30, ${station.color}15)`
+                    ? `linear-gradient(135deg, ${station.color}35, ${station.color}15)`
                     : 'transparent',
                   border: isSelected ? `1px solid ${station.color}` : '1px solid transparent',
                   color: isSelected ? '#ffffff' : '#cbd5e1',
-                  padding: '8px 14px',
+                  padding: '7px 12px',
                   borderRadius: '12px',
-                  fontSize: '0.8rem',
+                  fontSize: '0.78rem',
                   fontWeight: isSelected ? 700 : 500,
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px',
+                  gap: '7px',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
                   transition: 'all 0.2s ease',
                   fontFamily: 'var(--font-heading)',
-                  boxShadow: isSelected ? `0 0 15px ${station.color}40` : 'none',
+                  boxShadow: isSelected ? `0 0 16px ${station.color}45` : 'none',
                 }}
                 onMouseEnter={(e) => {
                   if (!isSelected) {
@@ -277,8 +381,8 @@ export const GalaxyHud: React.FC<GalaxyHudProps> = ({
               >
                 <span
                   style={{
-                    width: '10px',
-                    height: '10px',
+                    width: '9px',
+                    height: '9px',
                     borderRadius: '50%',
                     background: station.color,
                     display: 'inline-block',

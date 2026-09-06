@@ -1,6 +1,6 @@
 import React from 'react';
-import { educationData, personalInfo } from '../../data/portfolioData';
-import { GraduationCap, Compass, Code, CheckCircle2 } from 'lucide-react';
+import { educationData } from '../../data/portfolioData';
+import { GraduationCap, Compass, Code } from 'lucide-react';
 
 export const About2D: React.FC = () => {
   return (
@@ -26,13 +26,13 @@ export const About2D: React.FC = () => {
             }}
           >
             <Compass size={14} />
-            <span>Background & Foundation</span>
+            <span>Academic Excellence & Foundation</span>
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800, letterSpacing: '-0.02em' }}>
             About <span className="gradient-text">Me</span>
           </h2>
           <p style={{ color: '#94a3b8', maxWidth: '640px', margin: '12px auto 0', fontSize: '1rem' }}>
-            A passionate engineer focused on building robust distributed backend systems, AI-powered products, and high-performance algorithms.
+            Undergraduate at IIT Kharagpur specializing in distributed systems architectures, real-time AI pipelines, and competitive algorithmic problem solving.
           </p>
         </div>
 
@@ -44,13 +44,13 @@ export const About2D: React.FC = () => {
             alignItems: 'stretch',
           }}
         >
-          {/* Left: Bio & Philosophy */}
+          {/* Left: Bio, Philosophy & Pillars */}
           <div className="glass-panel" style={{ padding: '36px 32px', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
               <div
                 style={{
-                  width: '42px',
-                  height: '42px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '12px',
                   background: 'rgba(79, 70, 229, 0.2)',
                   border: '1px solid rgba(79, 70, 229, 0.4)',
@@ -64,57 +64,61 @@ export const About2D: React.FC = () => {
               </div>
               <div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 700 }}>Engineering Philosophy</h3>
-                <span style={{ fontSize: '0.82rem', color: '#94a3b8' }}>Scalable, resilient & intelligent</span>
+                <span style={{ fontSize: '0.82rem', color: '#94a3b8' }}>High performance, correctness & scalability</span>
               </div>
             </div>
 
             <p style={{ color: '#cbd5e1', fontSize: '0.96rem', lineHeight: 1.7, marginBottom: '16px' }}>
-              I am an undergraduate at the <strong>Indian Institute of Technology, Kharagpur</strong> with an intense drive for understanding systems from first principles. Whether it is building low-latency microservices with Go, training anomaly detection models for EV battery packs, or tuning Raft distributed consensus engines, I obsess over correctness and speed.
+              I am <strong>Pochiraju Kailash Ram Markandeya Sharma</strong>, an engineering undergraduate at the <strong>Indian Institute of Technology, Kharagpur</strong>. My engineering work is grounded in deep curiosity for high-throughput distributed systems and responsible applied AI.
             </p>
 
             <p style={{ color: '#cbd5e1', fontSize: '0.96rem', lineHeight: 1.7, marginBottom: '24px' }}>
-              My background in competitive programming (Max Rating 1606 on LeetCode) fuels my ability to design time and memory-efficient algorithms for real-world production challenges.
+              Whether architecting a <strong>5-node C++20 Raft key-value store</strong> with custom TCP protocols, developing real-time fraud detection pipelines with FastAPI and Redis, or building model-agnostic LLM oversight guardrails (Drishti), I build robust systems designed to perform under extreme load.
             </p>
 
-            {/* Core Values / Focus Pillars */}
+            {/* Core Pillars */}
             <div style={{ marginTop: 'auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               <div
                 style={{
                   background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(6, 182, 212, 0.2)',
                   borderRadius: '12px',
-                  padding: '12px',
+                  padding: '14px',
                 }}
               >
                 <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#38bdf8', marginBottom: '4px' }}>
-                  Microservices
+                  Distributed Systems
                 </div>
-                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Low-latency gRPC, REST, and distributed caching</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                  C++20, Raft consensus, WAL persistence, and gRPC microservices
+                </div>
               </div>
 
               <div
                 style={{
                   background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(168, 85, 247, 0.2)',
                   borderRadius: '12px',
-                  padding: '12px',
+                  padding: '14px',
                 }}
               >
                 <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#c084fc', marginBottom: '4px' }}>
-                  Applied AI
+                  Applied AI & Oversight
                 </div>
-                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>LLM agents, PyTorch time-series & vector retrieval</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                  RAG pipelines, critic model verification, and speech-to-text
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right: Education at IIT Kharagpur */}
+          {/* Right: Complete Educational History */}
           <div className="glass-panel glass-panel-glow-purple" style={{ padding: '36px 32px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
               <div
                 style={{
-                  width: '42px',
-                  height: '42px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '12px',
                   background: 'rgba(6, 182, 212, 0.18)',
                   border: '1px solid rgba(6, 182, 212, 0.4)',
@@ -127,122 +131,96 @@ export const About2D: React.FC = () => {
                 <GraduationCap size={22} />
               </div>
               <div>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 700 }}>Education</h3>
-                <span style={{ fontSize: '0.82rem', color: '#38bdf8', fontWeight: 600 }}>Premier Institute</span>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 700 }}>Education History</h3>
+                <span style={{ fontSize: '0.82rem', color: '#38bdf8', fontWeight: 600 }}>Consistent Academic Distinction</span>
               </div>
             </div>
 
-            {/* Institution Card */}
-            <div
-              style={{
-                background: 'rgba(6, 182, 212, 0.05)',
-                border: '1px solid rgba(6, 182, 212, 0.25)',
-                borderRadius: '16px',
-                padding: '20px',
-                marginBottom: '20px',
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#f8fafc' }}>
-                  {educationData.institution}
-                </h4>
-                <span
-                  style={{
-                    background: 'rgba(6, 182, 212, 0.2)',
-                    color: '#38bdf8',
-                    padding: '2px 10px',
-                    borderRadius: '6px',
-                    fontSize: '0.78rem',
-                    fontWeight: 700,
-                    fontFamily: 'var(--font-mono)',
-                  }}
-                >
-                  {educationData.period}
-                </span>
-              </div>
-
-              <div style={{ fontSize: '0.92rem', color: '#cbd5e1', fontWeight: 500, marginBottom: '6px' }}>
-                {educationData.degree}
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                <span
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.3), rgba(6, 182, 212, 0.3))',
-                    border: '1px solid rgba(6, 182, 212, 0.4)',
-                    color: '#38bdf8',
-                    padding: '4px 10px',
-                    borderRadius: '6px',
-                    fontSize: '0.82rem',
-                    fontWeight: 700,
-                    fontFamily: 'var(--font-mono)',
-                  }}
-                >
-                  {educationData.grade}
-                </span>
-                <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{educationData.location}</span>
-              </div>
-
-              {/* Highlights List */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
-                {educationData.highlights.map((h, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.86rem', color: '#cbd5e1' }}>
-                    <CheckCircle2 size={16} color="#06b6d4" style={{ marginTop: '2px', flexShrink: 0 }} />
-                    <span>{h}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Coursework Tags */}
-              {educationData.coursework && (
-                <div>
-                  <div style={{ fontSize: '0.78rem', color: '#38bdf8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px' }}>
-                    Key Coursework
-                  </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                    {educationData.coursework.map((course) => (
-                      <span
-                        key={course}
-                        style={{
-                          background: 'rgba(6, 182, 212, 0.08)',
-                          border: '1px solid rgba(6, 182, 212, 0.25)',
-                          borderRadius: '6px',
-                          padding: '3px 8px',
-                          fontSize: '0.74rem',
-                          color: '#e2e8f0',
-                          fontWeight: 500,
-                        }}
-                      >
-                        {course}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Quick Stats Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-              {personalInfo.stats.map((st, i) => (
+            {/* Institution Cards Stack */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+              {educationData.history?.map((edu) => (
                 <div
-                  key={i}
+                  key={edu.id}
                   style={{
                     background: 'rgba(255, 255, 255, 0.03)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '12px',
-                    padding: '12px 14px',
+                    borderRadius: '14px',
+                    padding: '16px 18px',
+                    transition: 'border-color 0.2s',
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.4)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)')}
                 >
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', fontFamily: 'var(--font-heading)' }}>
-                    <span className="gradient-text-cyan">{st.value}</span>
-                    <span style={{ fontSize: '0.75rem', color: '#94a3b8', marginLeft: '4px' }}>{st.suffix}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
+                    <h4 style={{ fontSize: '1.02rem', fontWeight: 700, color: '#f8fafc' }}>
+                      {edu.institution}
+                    </h4>
+                    <span
+                      style={{
+                        background: 'rgba(6, 182, 212, 0.18)',
+                        color: '#38bdf8',
+                        padding: '2px 8px',
+                        borderRadius: '6px',
+                        fontSize: '0.74rem',
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono)',
+                      }}
+                    >
+                      {edu.period}
+                    </span>
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '2px' }}>
-                    {st.label}
+
+                  <div style={{ fontSize: '0.86rem', color: '#94a3b8', marginBottom: '6px' }}>
+                    {edu.degree}
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.3), rgba(6, 182, 212, 0.3))',
+                        border: '1px solid rgba(6, 182, 212, 0.35)',
+                        color: '#38bdf8',
+                        padding: '2px 8px',
+                        borderRadius: '6px',
+                        fontSize: '0.78rem',
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono)',
+                      }}
+                    >
+                      {edu.gradeType}: {edu.grade}
+                    </span>
+                    <span style={{ fontSize: '0.75rem', color: '#64748b' }}>{edu.location}</span>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Coursework Tags */}
+            {educationData.coursework && (
+              <div>
+                <div style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px' }}>
+                  Core CS & Engineering Coursework
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {educationData.coursework.map((course) => (
+                    <span
+                      key={course}
+                      style={{
+                        background: 'rgba(6, 182, 212, 0.08)',
+                        border: '1px solid rgba(6, 182, 212, 0.2)',
+                        borderRadius: '6px',
+                        padding: '3px 8px',
+                        fontSize: '0.74rem',
+                        color: '#cbd5e1',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {course}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

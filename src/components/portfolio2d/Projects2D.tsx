@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { projectsData } from '../../data/portfolioData';
 import type { Project } from '../../types/portfolio';
-import { Code2, ExternalLink, Sparkles, CheckCircle, X, Layers, Cpu, Database } from 'lucide-react';
+import { Code2, ExternalLink, Sparkles, CheckCircle2, X, Layers, Cpu, Database } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { soundManager } from '../../utils/sound';
 
@@ -11,9 +11,9 @@ export const Projects2D: React.FC = () => {
 
   const categories = [
     { id: 'all', label: 'All Projects' },
-    { id: 'ai', label: 'AI & LLMs' },
-    { id: 'systems', label: 'Systems & Distributed' },
-    { id: 'fullstack', label: 'Fullstack Apps' },
+    { id: 'ai', label: 'AI & LLM Oversight' },
+    { id: 'systems', label: 'Distributed Systems & C++' },
+    { id: 'fullstack', label: 'Fullstack Applications' },
   ];
 
   const filteredProjects = selectedCategory === 'all'
@@ -51,17 +51,17 @@ export const Projects2D: React.FC = () => {
             }}
           >
             <Code2 size={14} />
-            <span>Featured Engineering</span>
+            <span>High-Performance Systems & AI</span>
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800, letterSpacing: '-0.02em' }}>
             Featured <span className="gradient-text">Projects</span>
           </h2>
           <p style={{ color: '#94a3b8', maxWidth: '640px', margin: '12px auto 0', fontSize: '1rem' }}>
-            Production-grade distributed storage systems, autonomous AI web application generators, and adaptive voice interview platforms.
+            Production-grade distributed storage clusters in C++20, real-time AI oversight guardrails, voice interview platforms, and AST website synthesizers.
           </p>
         </div>
 
-        {/* Filter Pills */}
+        {/* Category Filter Pills */}
         <div
           style={{
             display: 'flex',
@@ -93,7 +93,7 @@ export const Projects2D: React.FC = () => {
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   fontFamily: 'var(--font-heading)',
-                  boxShadow: isSelected ? '0 0 16px rgba(6, 182, 212, 0.35)' : 'none',
+                  boxShadow: isSelected ? '0 0 18px rgba(6, 182, 212, 0.4)' : 'none',
                 }}
               >
                 {cat.label}
@@ -102,191 +102,212 @@ export const Projects2D: React.FC = () => {
           })}
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with Border-Beam Card Effects */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
             gap: '30px',
           }}
         >
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="glass-panel"
+              className="border-beam-container"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                borderRadius: '20px',
-                padding: '28px',
-                position: 'relative',
-                overflow: 'hidden',
               }}
             >
-              {/* Category & Badge Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    fontSize: '0.78rem',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    color: '#94a3b8',
-                  }}
-                >
-                  {getCategoryIcon(project.category)}
-                  <span>{project.category}</span>
-                </div>
-
-                <span
-                  style={{
-                    background: 'rgba(6, 182, 212, 0.12)',
-                    border: '1px solid rgba(6, 182, 212, 0.35)',
-                    color: '#38bdf8',
-                    padding: '3px 10px',
-                    borderRadius: '6px',
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                  }}
-                >
-                  {project.badge}
-                </span>
-              </div>
-
-              {/* Title & Subtitle */}
-              <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
-                {project.title}
-              </h3>
-              <div style={{ fontSize: '0.86rem', color: '#38bdf8', fontWeight: 600, marginBottom: '16px' }}>
-                {project.subtitle}
-              </div>
-
-              {/* Description */}
-              <p style={{ color: '#cbd5e1', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px', flex: 1 }}>
-                {project.description}
-              </p>
-
-              {/* Metrics pill if present */}
-              {project.metrics && (
-                <div
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px dashed rgba(255, 255, 255, 0.15)',
-                    borderRadius: '8px',
-                    padding: '8px 12px',
-                    fontSize: '0.8rem',
-                    color: '#a5b4fc',
-                    fontWeight: 600,
-                    fontFamily: 'var(--font-mono)',
-                    marginBottom: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  <Sparkles size={14} color="#38bdf8" />
-                  <span>{project.metrics}</span>
-                </div>
-              )}
-
-              {/* Tech Tags */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '24px' }}>
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      borderRadius: '6px',
-                      padding: '3px 8px',
-                      fontSize: '0.75rem',
-                      color: '#94a3b8',
-                      fontWeight: 500,
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Card Footer Actions */}
               <div
+                className="border-beam-inner"
                 style={{
+                  padding: '28px',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingTop: '16px',
-                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                  flexDirection: 'column',
+                  height: '100%',
                 }}
               >
-                <button
-                  onClick={() => {
-                    soundManager.playSelectSound();
-                    setActiveModalProject(project);
-                  }}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: '#38bdf8',
-                    fontWeight: 600,
-                    fontSize: '0.86rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '4px 0',
-                  }}
-                >
-                  <span>Architecture & Details</span>
-                  <ExternalLink size={14} />
-                </button>
-
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    title="View Source on GitHub"
+                {/* Category & Badge Header */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div
                     style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '10px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#cbd5e1',
-                      transition: 'all 0.2s ease',
+                      gap: '6px',
+                      fontSize: '0.78rem',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      color: '#94a3b8',
                     }}
                   >
-                    <GithubIcon size={17} />
-                  </a>
+                    {getCategoryIcon(project.category)}
+                    <span>{project.category}</span>
+                  </div>
 
-                  {project.liveUrl && (
+                  <span
+                    style={{
+                      background: 'rgba(6, 182, 212, 0.12)',
+                      border: '1px solid rgba(6, 182, 212, 0.35)',
+                      color: '#38bdf8',
+                      padding: '3px 10px',
+                      borderRadius: '6px',
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {project.badge}
+                  </span>
+                </div>
+
+                {/* Title & Subtitle */}
+                <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
+                  {project.title}
+                </h3>
+                <div style={{ fontSize: '0.85rem', color: '#38bdf8', fontWeight: 600, marginBottom: '16px' }}>
+                  {project.subtitle}
+                </div>
+
+                {/* Description */}
+                <p style={{ color: '#cbd5e1', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '20px', flex: 1 }}>
+                  {project.description}
+                </p>
+
+                {/* Metrics pill */}
+                {project.metrics && (
+                  <div
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px dashed rgba(6, 182, 212, 0.3)',
+                      borderRadius: '8px',
+                      padding: '8px 12px',
+                      fontSize: '0.8rem',
+                      color: '#a5b4fc',
+                      fontWeight: 600,
+                      fontFamily: 'var(--font-mono)',
+                      marginBottom: '20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <Sparkles size={14} color="#38bdf8" />
+                    <span>{project.metrics}</span>
+                  </div>
+                )}
+
+                {/* Tech Tags */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '24px' }}>
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        borderRadius: '6px',
+                        padding: '3px 8px',
+                        fontSize: '0.75rem',
+                        color: '#94a3b8',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Card Footer Actions */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: '16px',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                    marginTop: 'auto',
+                  }}
+                >
+                  <button
+                    onClick={() => {
+                      soundManager.playSelectSound();
+                      setActiveModalProject(project);
+                    }}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#38bdf8',
+                      fontWeight: 600,
+                      fontSize: '0.86rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '4px 0',
+                    }}
+                  >
+                    <span>Architecture & Details</span>
+                    <ExternalLink size={14} />
+                  </button>
+
+                  <div style={{ display: 'flex', gap: '10px' }}>
                     <a
-                      href={project.liveUrl}
+                      href={project.githubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      title="Open Live Deployment"
+                      title="GitHub Repository"
                       style={{
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '10px',
-                        background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.3), rgba(6, 182, 212, 0.3))',
-                        border: '1px solid rgba(6, 182, 212, 0.4)',
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '8px',
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#38bdf8',
-                        transition: 'all 0.2s ease',
+                        color: '#f8fafc',
+                        transition: 'all 0.2s',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                        e.currentTarget.style.borderColor = '#38bdf8';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                       }}
                     >
-                      <ExternalLink size={17} />
+                      <GithubIcon size={16} />
                     </a>
-                  )}
+
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Live Demo"
+                        style={{
+                          width: '34px',
+                          height: '34px',
+                          borderRadius: '8px',
+                          background: 'rgba(6, 182, 212, 0.15)',
+                          border: '1px solid rgba(6, 182, 212, 0.35)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#38bdf8',
+                          transition: 'all 0.2s',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'rgba(6, 182, 212, 0.3)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'rgba(6, 182, 212, 0.15)';
+                        }}
+                      >
+                        <ExternalLink size={16} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -294,16 +315,17 @@ export const Projects2D: React.FC = () => {
         </div>
       </div>
 
-      {/* Deep-Dive Project Modal */}
+      {/* Detailed Architecture Inspection Modal */}
       {activeModalProject && (
         <div
           className="modal-overlay"
           onClick={() => setActiveModalProject(null)}
+          style={{ padding: '20px' }}
         >
           <div
             className="modal-content"
             onClick={(e) => e.stopPropagation()}
-            style={{ padding: '36px 32px' }}
+            style={{ padding: '36px', maxWidth: '820px' }}
           >
             {/* Modal Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
@@ -311,23 +333,23 @@ export const Projects2D: React.FC = () => {
                 <span
                   style={{
                     background: 'rgba(6, 182, 212, 0.15)',
-                    color: '#38bdf8',
                     border: '1px solid rgba(6, 182, 212, 0.4)',
-                    padding: '3px 10px',
+                    color: '#38bdf8',
+                    padding: '2px 10px',
                     borderRadius: '6px',
-                    fontSize: '0.75rem',
+                    fontSize: '0.74rem',
                     fontWeight: 700,
                     textTransform: 'uppercase',
                   }}
                 >
                   {activeModalProject.badge}
                 </span>
-                <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginTop: '8px', color: '#ffffff' }}>
+                <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#ffffff', marginTop: '6px' }}>
                   {activeModalProject.title}
                 </h3>
-                <p style={{ color: '#38bdf8', fontSize: '0.95rem', fontWeight: 600 }}>
+                <div style={{ color: '#38bdf8', fontSize: '0.9rem', fontWeight: 600 }}>
                   {activeModalProject.subtitle}
-                </p>
+                </div>
               </div>
 
               <button
@@ -349,53 +371,69 @@ export const Projects2D: React.FC = () => {
               </button>
             </div>
 
-            {/* In-depth content */}
-            <p style={{ color: '#cbd5e1', fontSize: '1rem', lineHeight: 1.7, marginBottom: '24px' }}>
+            {/* Deep Description */}
+            <p style={{ color: '#cbd5e1', fontSize: '0.96rem', lineHeight: 1.7, marginBottom: '24px' }}>
               {activeModalProject.longDescription || activeModalProject.description}
             </p>
 
-            {/* Architecture Highlights */}
-            <div style={{ marginBottom: '28px' }}>
-              <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc', marginBottom: '12px' }}>
-                Key Technical Features & Architecture
+            {/* Key Innovations Checklist */}
+            <div style={{ marginBottom: '24px' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff', marginBottom: '12px' }}>
+                Key Technical Features
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {activeModalProject.features.map((feat, fIdx) => (
-                  <div key={fIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                    <CheckCircle size={18} color="#06b6d4" style={{ marginTop: '2px', flexShrink: 0 }} />
-                    <span style={{ color: '#e2e8f0', fontSize: '0.92rem' }}>{feat}</span>
+                {activeModalProject.features.map((feat, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                    <CheckCircle2 size={18} color="#34d399" style={{ marginTop: '2px', flexShrink: 0 }} />
+                    <span style={{ color: '#e2e8f0', fontSize: '0.9rem', lineHeight: 1.5 }}>
+                      {feat}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Tech Stack Chips */}
-            <div style={{ marginBottom: '32px' }}>
-              <h4 style={{ fontSize: '0.9rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '10px' }}>
-                Technologies Used
-              </h4>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {activeModalProject.tags.map((t) => (
-                  <span
-                    key={t}
-                    style={{
-                      background: 'rgba(79, 70, 229, 0.15)',
-                      border: '1px solid rgba(79, 70, 229, 0.3)',
-                      color: '#a5b4fc',
-                      padding: '5px 12px',
-                      borderRadius: '8px',
-                      fontSize: '0.82rem',
-                      fontWeight: 600,
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
+            {/* System Architecture Details Box */}
+            {activeModalProject.architectureDetails && (
+              <div
+                style={{
+                  background: 'rgba(6, 182, 212, 0.05)',
+                  border: '1px solid rgba(6, 182, 212, 0.25)',
+                  borderRadius: '14px',
+                  padding: '18px 20px',
+                  marginBottom: '24px',
+                }}
+              >
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', marginBottom: '8px' }}>
+                  Architecture & Concurrency Model
+                </div>
+                <div style={{ fontSize: '0.88rem', color: '#f8fafc', marginBottom: '12px' }}>
+                  {activeModalProject.architectureDetails.concurrencyModel}
+                </div>
 
-            {/* Modal Links Footer */}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {activeModalProject.architectureDetails.components.map((comp) => (
+                    <span
+                      key={comp}
+                      style={{
+                        background: 'rgba(6, 182, 212, 0.15)',
+                        border: '1px solid rgba(6, 182, 212, 0.35)',
+                        color: '#38bdf8',
+                        padding: '3px 8px',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--font-mono)',
+                      }}
+                    >
+                      {comp}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Modal Actions */}
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
               <a
                 href={activeModalProject.githubUrl}
                 target="_blank"
@@ -404,7 +442,7 @@ export const Projects2D: React.FC = () => {
                 style={{ padding: '10px 18px', fontSize: '0.88rem' }}
               >
                 <GithubIcon size={16} />
-                <span>View GitHub Repository</span>
+                <span>View Source Code</span>
               </a>
 
               {activeModalProject.liveUrl && (
@@ -415,8 +453,8 @@ export const Projects2D: React.FC = () => {
                   className="btn-neon-primary"
                   style={{ padding: '10px 20px', fontSize: '0.88rem' }}
                 >
+                  <span>Launch Live App</span>
                   <ExternalLink size={16} />
-                  <span>Launch Live Demo</span>
                 </a>
               )}
             </div>

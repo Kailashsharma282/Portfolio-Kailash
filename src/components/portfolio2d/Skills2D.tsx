@@ -8,11 +8,11 @@ export const Skills2D: React.FC = () => {
 
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
+      case 'Terminal': return <Terminal size={18} />;
       case 'Server': return <Server size={18} />;
       case 'Brain': return <Brain size={18} />;
-      case 'Globe': return <Globe size={18} />;
-      case 'Terminal': return <Terminal size={18} />;
-      default: return <Cpu size={18} />;
+      case 'Cpu': return <Cpu size={18} />;
+      default: return <Globe size={18} />;
     }
   };
 
@@ -45,7 +45,7 @@ export const Skills2D: React.FC = () => {
             Skills & <span className="gradient-text">Proficiencies</span>
           </h2>
           <p style={{ color: '#94a3b8', maxWidth: '640px', margin: '12px auto 0', fontSize: '1rem' }}>
-            A balanced stack combining backend infrastructure engineering, AI model application, modern frontend, and algorithmic rigor.
+            A rigorous engineering stack combining distributed C++ systems, asynchronous Python/FastAPI microservices, RAG AI agents, and competitive problem solving.
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export const Skills2D: React.FC = () => {
         <div
           className="glass-panel"
           style={{
-            maxWidth: '900px',
+            maxWidth: '960px',
             margin: '0 auto',
             padding: '36px 32px',
             borderRadius: '24px',
@@ -163,7 +163,7 @@ export const Skills2D: React.FC = () => {
                       width: `${skill.level}%`,
                       background: `linear-gradient(90deg, #4f46e5, ${skillCategoriesData[activeTab].color})`,
                       borderRadius: '4px',
-                      boxShadow: `0 0 10px ${skillCategoriesData[activeTab].color}`,
+                      boxShadow: `0 0 12px ${skillCategoriesData[activeTab].color}`,
                       transition: 'width 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
                     }}
                   />
@@ -172,7 +172,7 @@ export const Skills2D: React.FC = () => {
             ))}
           </div>
 
-          {/* Quick Skill Chips at Bottom */}
+          {/* Quick Ecosystem Pills */}
           <div
             style={{
               marginTop: '36px',
@@ -186,9 +186,15 @@ export const Skills2D: React.FC = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#94a3b8', marginRight: '8px' }}>
               <Sparkles size={14} color="#06b6d4" />
-              <span>Full Ecosystem:</span>
+              <span>Full Ecosystem Stack:</span>
             </div>
-            {['Go', 'Python', 'Node.js', 'PyTorch', 'React', 'TypeScript', 'Three.js', 'PostgreSQL', 'Redis', 'Docker', 'gRPC', 'Raft', 'Git', 'Linux', 'FastAPI'].map((tech) => (
+            {[
+              'C++20', 'C', 'Python', 'JavaScript', 'TypeScript', 'SQL',
+              'React', 'Node.js', 'Express', 'FastAPI', 'gRPC', 'WebSockets',
+              'RAG', 'LLM APIs', 'Speech-to-Text', 'NumPy', 'Pandas', 'PostgreSQL',
+              'MongoDB', 'Redis', 'Docker', 'Raft Consensus', 'Multithreading', 'AWS S3',
+              'Git', 'Postman', 'Vercel', 'Render'
+            ].map((tech) => (
               <span
                 key={tech}
                 style={{
